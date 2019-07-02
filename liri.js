@@ -28,11 +28,20 @@ function liriBot() {
 liriBot();
 
 function searchSpotify (song) {
-    spotify.search({ type: 'track', query: 'All the Small Things', limit: "1" }, function(err, data) {
+    spotify.search({ type: 'track', query: song, limit: "1" }, function(err, data) {
         if (err) {
           return console.log('Error occurred: ' + err);
         }
-       
-      console.log(data); 
+      console.log("================================================================")
+      console.log("Artist: " + data.tracks.items[0].artists[0].name); 
+      console.log("")
+      console.log("Song Name: " + data.tracks.items[0].name);
+      console.log("")
+      console.log("Preview Song: " + data.tracks.items[0].preview_url);
+      console.log("")
+      console.log("Album: " + data.tracks.items[0].album.name);
+      console.log("================================================================")
+     
+      
       });
 }
