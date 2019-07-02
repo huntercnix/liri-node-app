@@ -44,7 +44,7 @@ function searchSpotify (song) {
         // console log all the items from the api
       console.log("================================================================");
       console.log("");
-      console.log("Spotify Search Results");
+      console.log("Spotify Search Results:");
       console.log("");
       console.log("Artist: " + data.tracks.items[0].artists[0].name); 
       console.log("");
@@ -76,7 +76,7 @@ function searchMovie (movie) {
             // logging different responses from omdb
             console.log("================================================================");
             console.log("");
-            console.log("Movie Search Results");
+            console.log("Movie Search Results:");
             console.log("");
             console.log("Movie Title: " + response.data.Title);
             console.log("");
@@ -127,3 +127,16 @@ function searchBands (artist) {
         }
     )
 }
+
+
+// do whatever function calls the random text file every time
+function doWhatever() {
+    
+    fs.readFile("random.txt", "utf8", function(err, data) {
+        // If the code experiences any errors it will log the error to the console.
+        if (err) {
+          return console.log(err);
+        }
+ });
+}
+  
