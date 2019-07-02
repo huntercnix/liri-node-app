@@ -7,6 +7,7 @@ var fs = require("fs");
 var Spotify = require("node-spotify-api");
 var spotify = new Spotify(keys.spotify);
 var axios = require("axios");
+var moment = require('moment');
 
 var arg = process.argv[2];
 var input = process.argv.slice(3).join(" ");
@@ -21,7 +22,7 @@ function liriBot() {
         searchMovie(input); 
     }   else if (arg === "concert-this"){
         console.log(input);
-        searchSpotify(input);
+        searchBands(input);
     }   else if (arg === "do-what-it-says"){
         console.log(input);
         doWhatever(input);
@@ -42,6 +43,7 @@ function searchSpotify (song) {
         }
         // console log all the items from the api
       console.log("================================================================");
+      console.log("");
       console.log("Spotify Search Results");
       console.log("");
       console.log("Artist: " + data.tracks.items[0].artists[0].name); 
@@ -73,6 +75,7 @@ function searchMovie (movie) {
 
             // logging different responses from omdb
             console.log("================================================================");
+            console.log("");
             console.log("Movie Search Results");
             console.log("");
             console.log("Movie Title: " + response.data.Title);
@@ -97,4 +100,30 @@ function searchMovie (movie) {
         
         }
     );
+}
+
+// Concert search function 
+function searchBands (artist) {
+    var bandQueryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+
+    // axios call for bandQueryUrl 
+    axios.get(bandQueryUrl).then(
+        function (response) {
+            console.log("================================================================");
+            console.log("");
+            console.log("Concert Search Results:");
+            console.log("");
+            console.log("Artist: " + artist);
+            console.log("");
+            console.log("Venue Name: " + response.data[0].venue.name);
+            console.log("");
+            console.log("Venue Location: " + response.data[0].venue.city + ", " + response.data[0].venue.region + ", " + response.data[0].venue.country);
+            console.log("");
+            console.log("Date of Event: " +  moment(response.datetime).format("MM/DD/YYYY"));
+            console.log("");
+            console.log("================================================================");
+
+
+        }
+    )
 }
