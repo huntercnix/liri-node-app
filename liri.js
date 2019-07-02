@@ -1,3 +1,5 @@
+// variables/npm installs/keys
+
 var request = require("request");
 var dotenv = require("dotenv").config();
 var keys = require("./keys.js");
@@ -8,7 +10,7 @@ var spotify = new Spotify(keys.spotify);
 var arg = process.argv[2];
 var input = process.argv.slice(3).join(" ");
 
-
+// This is the liriBot function that houses the other functions
 function liriBot() {
     if (arg === "spotify-this-song"){
         console.log("");
@@ -25,13 +27,19 @@ function liriBot() {
     }
 };
 
+
+// run liriBot
 liriBot();
+
+
+// spotify search function 
 
 function searchSpotify (song) {
     spotify.search({ type: 'track', query: song, limit: "1" }, function(err, data) {
         if (err) {
           return console.log('Error occurred: ' + err);
         }
+        // console log all the items from the api
       console.log("================================================================")
       console.log("Artist: " + data.tracks.items[0].artists[0].name); 
       console.log("")
