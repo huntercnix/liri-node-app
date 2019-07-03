@@ -140,7 +140,7 @@ function doWhatever() {
         // If the code experiences any errors it will log the error to the console.
         var txt = data.split(',');
 
-        spotifySong(txt[1]);
+        searchSpotify(txt[1]);
  });
 }
   
