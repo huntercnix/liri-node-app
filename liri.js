@@ -34,9 +34,13 @@ function liriBot() {
 liriBot();
 
 
+
 // Spotify search function 
 
 function searchSpotify (song) {
+    if (song === "") {
+        song = "The Sign Ace Of Base";
+    }
     spotify.search({ type: 'track', query: song, limit: "1" }, function(err, data) {
         if (err) {
           return console.log('Error occurred: ' + err);
@@ -134,9 +138,9 @@ function doWhatever() {
     
     fs.readFile("random.txt", "utf8", function(err, data) {
         // If the code experiences any errors it will log the error to the console.
-        if (err) {
-          return console.log(err);
-        }
+        var txt = data.split(',');
+
+        spotifySong(txt[1]);
  });
 }
   
